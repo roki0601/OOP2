@@ -104,10 +104,11 @@ void Car::print()
 
 int main()
 {
+	
 	setlocale(LC_ALL, "Russian");
 	int choice;
 menu:
-	cout << "\n1. Статическое создание\n2. Динамическое создание\n3. Демонстрация методов\n4. Наследование \n0.Выход из программы\n";
+	cout << "\n1. Статическое создание\n2. Динамическое создание\n3. Демонстрация методов\n4. Наследование\n5. Композиция \n0.Выход из программы\n";
 	cin >> choice;
 	switch (choice)
 	{
@@ -146,6 +147,14 @@ menu:
 		{
 			system("cls");
 			UniqueCar uc1(1, 1, 4);
+			goto menu;
+			break;
+		}
+		case 5:
+		{
+			system("cls");
+			Car* c = new UniqueCar(2, 2, 4);
+			delete c;
 			goto menu;
 			break;
 		}
