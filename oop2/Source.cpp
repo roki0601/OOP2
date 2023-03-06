@@ -94,10 +94,49 @@ public:
 
 
 
+
 void Car::print()
 {
 	cout << model << "\t" << count << endl;
 }
+
+class Factory {
+protected:
+	Car *car1;
+	Car *car2;
+public:
+	Factory()
+	{
+		cout << "Factory()\n";
+		car1 = new Car;
+		car2 = new Car;
+	}
+
+	Factory(int model1, int count1, int model2, int count2)
+	{
+		cout << "Factory(int model1, int count1, int model2, int count2)\n";
+		car1 = new Car(model1, count1);
+		car2 = new Car(model2, count2);
+	}
+
+	Factory(const Factory& f)
+	{
+		cout << "Factory(const Factory& f)\n";
+		car1 = new Car(*(f.car1));
+		car2 = new Car(*(f.car2));
+	}
+
+	~Factory()
+	{
+		delete car1;
+		delete car2;
+		cout << "Destruction Factory\n";
+	}
+};
+
+
+
+
 
 int main()
 {
@@ -149,8 +188,10 @@ menu:
 		case 5:
 		{
 			system("cls");
-			Car* c = new UniqueCar(2, 2, 4); //композиция объектов 
-			delete c;
+			Factory* f1 = new Factory;
+			Factory* f2 = new Factory(*f1);
+			delete f1;
+			delete f2;
 			goto menu;
 			break;
 		}
